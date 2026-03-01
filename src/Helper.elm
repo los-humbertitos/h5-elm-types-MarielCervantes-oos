@@ -9,19 +9,19 @@ type GradeStatus
 
 categoricalGrade : List Float -> List GradeStatus
 categoricalGrade grades =
-    List.map toStatus grades
+    let
+        evalGrade : Float -> GradeStatus
+        evalGrade grade =
+            if grade < 0 then
+                Pending
 
+            else if grade >= 7 then
+                Approved
 
-toStatus : Float -> GradeStatus
-toStatus grade =
-    if grade < 0 then
-        Pending
-
-    else if grade > 7 then
-        Approved
-
-    else
-        Failed
+            else
+                Failed
+    in
+    List.map evalGrade grades
 
 
 type AirplaneStatus
